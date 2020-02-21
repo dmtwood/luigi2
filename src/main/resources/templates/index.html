@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+
+<!-- Je associeert de prefix th met de URI van de Thymeleaf library: http://www.thymeleaf.org.
+// cf. XML bestanden.
+// Je neemt later met die prefix code (if, for, ...) op in de pagina.-->
+<html lang="nl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Pizza Luigi</title>
+    <link rel="icon" href="images/luigi.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/luigi.css">
+</head>
+<body>
+<h1>Pizza Luigi</h1>
+<img src="images/luigi.jpg" alt="pizza" class="fullwidth">
+
+<!--    Je tikt hard gecodeerd Goede dag in de pagina. Dit wordt straks Goede morgen, Goede dag of Goede avond naargelang het moment van de dag.-->
+<!--    <h2>Goede dag</h2>    -->
+
+<!--    th:text vervangt de tekst tussen <span> en </span> door de data die je van de controller   -->
+<!--    doorkreeg onder de naam boodschap. Je omringt die naam met ${ en }.                        -->
+<!--    Thymeleaf stuurt daarna de HTML als response naar de browser.                              -->
+<h2>Goede <span th:text="${boodschap}"></span></h2>
+</body>
+</html>
