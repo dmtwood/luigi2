@@ -17,10 +17,11 @@
     <li th:each="pizza:${pizzas}" th:object="${pizza}" >
 
         // (2) Je toont de attributen naam en prijs van de pizza.
-        <span th:text="*{naam}" ></span> &euro; <span th:text="*{prijs}" >
+        <span th:text="*{naam}" ></span> &euro; <span th:text="*{prijs}" > </span>
+        
 
         // (1) Thymeleaf neemt de span tag enkel op in de response als de pizza pikant is.
-        <span th:if="*{pikant}">pikant</span>
+        <span th:if="*{pikant}" >pikant</span>
     </li>
 
 <!--    (1) Je itereert met th:each over de List in pizzas.-->
