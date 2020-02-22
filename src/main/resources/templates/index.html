@@ -20,6 +20,37 @@
 <!--    th:text vervangt de tekst tussen <span> en </span> door de data die je van de controller   -->
 <!--    doorkreeg onder de naam boodschap. Je omringt die naam met ${ en }.                        -->
 <!--    Thymeleaf stuurt daarna de HTML als response naar de browser.                              -->
-<h2>Goede <span th:text="${boodschap}"></span></h2>
+<h3>Goede <span th:text="${boodschap}"></span></h3>
 </body>
+
+<h4>De zaakvoerder</h4>
+
+
+<!--// (1) Je geeft met th:object aan dat je zaakvoeder attributen leest, in het huidig element <dl> en in al zijn child elementen.-->
+<dl th:object="${zaakvoerder}">
+    <dt>Naam</dt>
+<!--    // (2) Je leest het attribuut naam (van zaakvoerder) met een selection expression. Dit is een expression tussen *{ en }.-->
+    <dd th:text=" *{naam} "></dd>
+    <dt>Aantal kinderen</dt>
+    <dd th:text=" *{aantalKinderen} "></dd>
+    <dt>Gehuwd</dt>
+    <dd th:text=" *{gehuwd} ? 'ja' : 'nee' "></dd>
+    <dt>Adres</dt>
+<!--    (1) Je geeft aan dat je attributen zal lezen van zaakvoerder.adres. >> GENESTE ATTRIBUTEN  -->
+    <dd th:object="${zaakvoerder.adres}"
+<!--        (2) Je combineert data en vaste tekst (en spaties) tussen   | en |    -->
+        th:text="| *{straat} *{huisNr} *{postcode} *{gemeente} |"
+    ></dd>
+
+</dl>
+
+<!--<d1>-->
+<!--    <dt>Naam</dt>-->
+<!--    <dd th:text="${zaakvoerder.naam}"></dd>-->
+<!--    <dt>Aantal Kinderen</dt>-->
+<!--    <dd th:text="${zaakvoerder.aantalKinderen}"></dd>-->
+<!--    <dt>Gehuwd</dt>-->
+<!--    <dd th:text="${zaakvoerder.gehuwd} ? 'Ja' : 'Nee'"></dd>-->
+<!--</d1>-->
+
 </html>

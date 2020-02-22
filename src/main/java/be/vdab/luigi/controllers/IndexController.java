@@ -1,11 +1,14 @@
 package be.vdab.luigi.controllers;
 
+import be.vdab.luigi.domain.Adres;
+import be.vdab.luigi.domain.Persoon;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+//import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 
 
@@ -23,23 +26,37 @@ import java.time.LocalTime;
 class IndexController {
 
 
-        // @GetMapping >> bijbehorende method (index) verwerkt GET requests. Bij een GET request naar de URL / , roept Spring de method index op.
+
+
+    private String boodschap() {
+        int uur = LocalTime.now().getHour();
+        if (uur < 12) {
+            return "morgen";
+        }
+        if (uur < 18) {
+            return "middag";
+        }
+        return "avond";
+    }
+    // @GetMapping >> bijbehorende method (index) verwerkt GET requests. Bij een GET request naar de URL / , roept Spring de method index op.
     @GetMapping
 
     // Een method die data doorgeeft aan de Thymeleaf pagina heeft als returntype ModelAndView. Model staat voor de data, View staat voor de Thymeleaf pagina.
-    public ModelAndView index() {
-        int uur = LocalTime.now().getHour();
-        if (uur < 12) {
-            return new ModelAndView("index", "boodschap", "morgen");
-        }
-        if (uur < 18) {
-            return new ModelAndView("index", "boodschap", "middag");
-        }
-        return new ModelAndView("index", "boodschap", "avond");
+public ModelAndView index(){
+
+        // (1) Je maakt een ModelAndView object. Het werkt samen met de Thymeleaf pagina index.html.
+        ModelAndView modelAndView = new ModelAndView(
+
+                // (2) Je geeft de return waarde van boodschap() door onder de naam boodschap.
+                "index", "boodschap", boodschap()
+        );
+
+        // (3) Je geeft met de method addObject nog EXTRA data door onder de naam zaakvoerder.  In deze een Persoon object
+        modelAndView.addObject("zaakvoerder", new Persoon(
+                "Luigi", "Peperone", "7", true, LocalDate.of(1976,8,5), new Adres(
+                        "Grote Markt", "69", 2300, "Turnhout")));
+        return modelAndView;
     }
-
-
-
 
 //        // De method moet een String terug geven, method-naamkeuze is vrij
 //    public String index() {
@@ -68,3 +85,26 @@ class IndexController {
             // Je moet de extensie (.html) niet vermelden.
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
