@@ -25,9 +25,6 @@ import java.time.LocalTime;
     // De class niet public: Je geeft classes, en vars, niet meer visibility dan nodig.
 class IndexController {
 
-
-
-
     private String boodschap() {
         int uur = LocalTime.now().getHour();
         if (uur < 12) {

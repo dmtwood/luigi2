@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="nl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Pizza's</title>
+    <link rel="icon" href="../static/images/luigi.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../static/css/luigi.css">
+</head>
+<body>
+
+<h2>Pizza's</h2>
+
+
+<ul class="zebra">
+
+<!--    // (1) Je geeft met th:object aan dat je attributen zal lezen van pizza.-->
+    <li th:each="pizza:${pizzas}" th:object="${pizza}" >
+
+        // (2) Je toont de attributen naam en prijs van de pizza.
+        <span th:text="*{naam}" ></span> &euro; <span th:text="*{prijs}" >
+
+        // (1) Thymeleaf neemt de span tag enkel op in de response als de pizza pikant is.
+        <span th:if="*{pikant}">pikant</span>
+    </li>
+
+<!--    (1) Je itereert met th:each over de List in pizzas.-->
+<!--    De variabele pizza wijst bij elke iteratie naar een volgend element in de List.-->
+<!--    th:text vervangt de tekst tussen <li> en </li> door de inhoud van de variabele pizza.-->
+
+</ul>
+
+
+
+</body>
+</html>
