@@ -19,14 +19,17 @@
 <!--        // (2) Je toont de attributen naam en prijs van de pizza.-->
         <span th:text="*{naam}" ></span> &euro;<span th:text="*{prijs}" ></span>
 
-
 <!--        // (1) Thymeleaf neemt de span tag enkel op in de response als de pizza pikant is.-->
         <span th:if="*{pikant}" >, pikant </span>
-    </li>
 
-<!--    (1) Je itereert met th:each over de List in pizzas.-->
-<!--    De variabele pizza wijst bij elke iteratie naar een volgend element in de List.-->
-<!--    th:text vervangt de tekst tussen <li> en </li> door de inhoud van de variabele pizza.-->
+        <a th:href="@{/pizzas/{id}(id=*{id})}">detail</a>
+
+<!--        (1) Je vermeldt de URI template /pizzas/{id} >> Thymeleaf maakt een URL op basis ervan -->
+
+<!--        Tussen ronde haakjes staat dat Thymeleaf de path variabele id moet invullen-->
+
+<!--        met de id van de huidige pizza. Je vindt dit nummer in *{id}.-->
+    </li>
 
 </ul>
 
