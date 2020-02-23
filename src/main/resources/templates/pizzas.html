@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Pizza's</title>
-    <link rel="icon" href="../static/images/luigi.ico" type="image/x-icon">
-    <link rel="stylesheet" href="../static/css/luigi.css">
+<!--    (1) Je vervangt href door th:href. Je omsluit de URL met @{ en }. Je begint de URL met /.-->
+<!--    / staat voor de “root URL” van je website: de URL die hoort bij je welkom pagina.-->
+    <link rel="icon" th:href="@{/images/luigi.ico}" type="image/x-icon">
+    <link rel="stylesheet" th:href="@{../static/css/luigi.css}">
 </head>
 <body>
 
@@ -16,12 +18,12 @@
 <!--    // (1) Je geeft met th:object aan dat je attributen zal lezen van pizza.-->
     <li th:each="pizza:${pizzas}" th:object="${pizza}" >
 
-        // (2) Je toont de attributen naam en prijs van de pizza.
-        <span th:text="*{naam}" ></span> &euro; <span th:text="*{prijs}" > </span>
-        
+<!--        // (2) Je toont de attributen naam en prijs van de pizza.-->
+        <span th:text="*{naam}" ></span> &euro;<span th:text="*{prijs}" ></span>
 
-        // (1) Thymeleaf neemt de span tag enkel op in de response als de pizza pikant is.
-        <span th:if="*{pikant}" >pikant</span>
+
+<!--        // (1) Thymeleaf neemt de span tag enkel op in de response als de pizza pikant is.-->
+        <span th:if="*{pikant}" >, pikant </span>
     </li>
 
 <!--    (1) Je itereert met th:each over de List in pizzas.-->
