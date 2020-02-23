@@ -4,13 +4,21 @@
 // cf. XML bestanden.
 // Je neemt later met die prefix code (if, for, ...) op in de pagina.-->
 <html lang="nl" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Pizza Luigi</title>
-    <link rel="icon" th:href="@{images/luigi.ico}" type="image/x-icon">
-    <link rel="stylesheet" th:href="@{css/luigi.css }">
-</head>
+
+<!--// gebruik head uit fragments.html en vul parameter (title='...') in. ! Enkele ' ' -->
+<head th:replace="fragments::head(title='Pizza Luigi')"></head>
+
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Pizza Luigi</title>-->
+<!--    <link rel="icon" th:href="@{images/luigi.ico}" type="image/x-icon">-->
+<!--    <link rel="stylesheet" th:href="@{css/luigi.css }">-->
+<!--</head>-->
+
 <body>
+<!--(1) Thymeleaf vervangt het huidig <nav> element door het fragment met de naam menu uit het bestand fragments(.html).-->
+<nav th:replace="fragments::menu"></nav>
+
 <h1>Pizza Luigi</h1>
 <img alt="pizza" class="fullwidth" th:src="@{/images/luigi.jpg}">
 

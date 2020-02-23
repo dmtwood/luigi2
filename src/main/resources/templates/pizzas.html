@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html lang="nl" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Pizza's</title>
-<!--    (1) Je vervangt href door th:href. Je omsluit de URL met @{ en }. Je begint de URL met /.-->
-<!--    / staat voor de “root URL” van je website: de URL die hoort bij je welkom pagina.-->
-    <link rel="icon" th:href="@{/images/luigi.ico}" type="image/x-icon">
-    <link rel="stylesheet" th:href="@{../static/css/luigi.css}">
-</head>
+
+<!--// gebruik head uit fragments.html en vul parameter (title='...') in. ! Enkele ' ' -->
+<head th:replace="fragments::head(title='Pizza\'s')"></head>
+
 <body>
+<!--// menu-->
+<nav th:replace="fragments::menu"></nav>
 
 <h2>Pizza's</h2>
 

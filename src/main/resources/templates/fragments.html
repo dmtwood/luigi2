@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="nl" xmlns:th="http://www.thymeleaf.org">
+
+<!--fragment head met 1 parameter title, meerdere parameters scheiden door een komma -->
+<head th:fragment="head(title)" xmlns:th="http://www.thymeleaf.org">
+
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/luigi.css}">
+    <link rel="icon" th:href="@{/images/luigi.ico}" type="image/x-icon">
+
+<!--    (2) Je gebruikt de inhoud van de parameter title.-->
+    <title th:text="${title}"></title>
+
+</head>
+
+<body>
+
+<!--(1) Je geeft elke fragment een unieke naam met th:fragment. Dit fragment heet menu.-->
+<nav th:fragment="menu" xmlns:th="http://www.thymeleaf.org">
+    <ul>
+        <li> <a th:href="@{/}"> Welkom </a> </li>
+        <li> <a th:href="@{/pizzas}"> Pizza's </a></li>
+    </ul>
+</nav>
+
+</body>
+</html>
