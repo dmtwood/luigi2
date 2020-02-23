@@ -32,8 +32,6 @@ public class PizzaController {
 
     // RequestMapping > pizzas & GetMapping > {id} >> URI template: pizzas/{id}
     @GetMapping("{id}")
-
-
     // verwerkt GET requests naar /pizza/1 (, 2, 3, ...) en werkt samen met pizza.html
 //    spring stopt de waarde van de path var met naam id in de URL van de request. vb pizzas/1 >> id=1
     public ModelAndView pizza(@PathVariable long id) {
