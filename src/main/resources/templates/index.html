@@ -16,6 +16,9 @@
 <!--</head>-->
 
 <body>
+
+<div th:if="${reedsBezocht}">Welkom terug.</div>
+
 <!--(1) Thymeleaf vervangt het huidig <nav> element door het fragment met de naam menu uit het bestand fragments(.html).-->
 <nav th:replace="fragments::menu"></nav>
 
@@ -29,7 +32,7 @@
 <!--    doorkreeg onder de naam boodschap. Je omringt die naam met ${ en }.                        -->
 <!--    Thymeleaf stuurt daarna de HTML als response naar de browser.                              -->
 <h3>Goede <span th:text="${boodschap}"></span></h3>
-</body>
+
 
 <h4>De zaakvoerder</h4>
 
@@ -61,5 +64,8 @@
 <!--    <dt>Gehuwd</dt>-->
 <!--    <dd th:text="${zaakvoerder.gehuwd} ? 'Ja' : 'Nee'"></dd>-->
 <!--</d1>-->
+
+<p>Deze pagina werd <span th:text="${aantalKerenBekeken}"></span> keer bekeken.</p>
+</body>
 
 </html>

@@ -6,8 +6,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.ModelAndViewDefiningException;
+
 import java.math.BigDecimal;
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("pizzas")
@@ -49,6 +53,33 @@ public class PizzaController {
                                     // spring neemt automatisch lowercase ClassName als naam van de TL-data
         return modelAndView2;
     }
+
+    private List<BigDecimal> uniekePrijzen(){
+        return Arrays.stream(pizzas)
+                .map( pizza -> pizza.getPrijs())
+                .distinct().sorted()
+                .collect(Collectors.toList());
+    }
+    @GetMapping("prijzen")
+    public ModelAndView prijzen(){
+        return new ModelAndView("prijzen", "prijzen", uniekePrijzen());
+    }
+
+    private List<Pizza> pizzasMetPrijs(BigDecimal prijs) {
+        return Arrays.stream(pizzas)
+                .filter(pizza -> pizza.getPrijs().compareTo(prijs) == 0)
+                .collect(Collectors.toList());
+    }
+    @GetMapping("prijzen/{prijs}")
+    public ModelAndView pizzasMetEenPrijs(@PathVariable BigDecimal prijs) {
+        return new ModelAndView("prijzen", "pizzas", pizzasMetPrijs(prijs)) .addObject("prijzen", uniekePrijzen());
+//        ModelAndView modelAndView = new ModelAndView("prijzen","pizzas",pizzasMetPrijs(prijs));
+//        modelAndView.addObject("prijzen", uniekePrijzen());
+//        return modelAndView;
+//      return new ModelAndView("prijzen", "pizzas", pizzasMetPrijs(prijs));
+    }
+
+
 
 
 }
