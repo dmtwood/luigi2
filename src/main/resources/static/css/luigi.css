@@ -86,6 +86,12 @@ nav li {
 	display: inline;
 }
 
+a {
+	color: red;
+	text-decoration: none;
+	font-width: bold;
+}
+
 nav li a {
 	color: white;
 	font-weight: bold;

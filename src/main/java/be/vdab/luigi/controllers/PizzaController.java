@@ -1,12 +1,14 @@
 package be.vdab.luigi.controllers;
 
 import be.vdab.luigi.domain.Pizza;
+import be.vdab.luigi.exceptions.KoersClientException;
+import be.vdab.luigi.restclients.KoersClient;
+import be.vdab.luigi.services.EuroService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.ModelAndViewDefiningException;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
@@ -19,6 +21,8 @@ import java.util.stream.Collectors;
 
 public class PizzaController {
 
+    private final EuroService euroService;
+
     private final Pizza[] pizzas = {
             new Pizza(1,"Prosciutto", BigDecimal.valueOf(7), true),
             new Pizza(2, "Margherita", BigDecimal.valueOf(5), false),
@@ -26,6 +30,10 @@ public class PizzaController {
             new Pizza(4,"Calzone", BigDecimal.valueOf(6), false),
             new Pizza(5,"Pepperoni", BigDecimal.valueOf(9), true)
     };
+
+    public PizzaController(EuroService euroService) {
+        this.euroService = euroService;
+    }
 
     @GetMapping
     // verwerkt GET requests naar /pizzas en werkt samen met pizzas.html
@@ -46,8 +54,17 @@ public class PizzaController {
         // if the pizza with this id is found, ad it to the pizza ThymeLeaf (TL) page
         Arrays.stream(pizzas)
                 .filter(pizza -> pizza.getId() == id).findFirst()
-                .ifPresent(pizza -> modelAndView2.addObject( pizza));
-//                .ifPresent(modelAndView2::addObject);
+                .ifPresent(pizza -> {
+                    modelAndView2.addObject( "pizza", pizza);
+                    try {
+                        modelAndView2.addObject(
+                                "inDollar", euroService.naarDollar(pizza.getPrijs()));
+                    } catch (KoersClientException ex) {
+
+                    }
+                });
+//
+
                                     // spring neemt automatisch lowercase ClassName als naam van de TL-data
         return modelAndView2;
     }
@@ -58,6 +75,7 @@ public class PizzaController {
                 .distinct().sorted()
                 .collect(Collectors.toList());
     }
+
     @GetMapping("prijzen")
     public ModelAndView prijzen(){
         return new ModelAndView("prijzen", "prijzen", uniekePrijzen());
@@ -68,13 +86,16 @@ public class PizzaController {
                 .filter(pizza -> pizza.getPrijs().compareTo(prijs) == 0)
                 .collect(Collectors.toList());
     }
+
     @GetMapping("prijzen/{prijs}")
     public ModelAndView pizzasMetEenPrijs(@PathVariable BigDecimal prijs) {
-        return new ModelAndView("prijzen", "pizzas", pizzasMetPrijs(prijs)) .addObject("prijzen", uniekePrijzen());
-//        ModelAndView modelAndView = new ModelAndView("prijzen","pizzas",pizzasMetPrijs(prijs));
-//        modelAndView.addObject("prijzen", uniekePrijzen());
-//        return modelAndView;
-//      return new ModelAndView("prijzen", "pizzas", pizzasMetPrijs(prijs));
+        return new ModelAndView("prijzen", "pizzas", pizzasMetPrijs(prijs))
+                    .addObject("prijzen", uniekePrijzen() );
+
+        //        ModelAndView modelAndView = new ModelAndView("prijzen","pizzas",pizzasMetPrijs(prijs));
+        //        modelAndView.addObject("prijzen", uniekePrijzen());
+        //        return modelAndView;
+        //      return new ModelAndView("prijzen", "pizzas", pizzasMetPrijs(prijs));
     }
 
 

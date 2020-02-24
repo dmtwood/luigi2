@@ -4,22 +4,23 @@
 </head>
 
 <body>
-
+<nav>
 <nav th:replace="fragments::menu"></nav>
 
 <h3> prijzen </h3>
 
 <ul>
     <li th:each="prijs:${prijzen}">
-        <a th:href="@{  /pizzas/prijzen/{prijs} ( prijs=${prijs} )  }"  th:text="${prijs}"> </a>
+        <a th:href="@{  /pizzas/prijzen/{prijs} ( prijs=${prijs} )  }" th:text="${prijs}"> </a>
     </li>
 </ul>
 
 <h2 th:if="${prijs} != null">Pizzas met een prijs van
     <span th:text="${prijs}"></span></h2>
+
 <ul th:if="${pizzas} != null">
     <li th:each="pizza:${pizzas}" th:text="${pizza.naam}"></li>
 </ul>
-
+</nav>
 </body>
 </html>

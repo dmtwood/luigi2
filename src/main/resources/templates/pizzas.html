@@ -22,7 +22,7 @@
 <!--        // (1) Thymeleaf neemt de span tag enkel op in de response als de pizza pikant is.-->
         <span th:if="*{pikant}" >, pikant </span>
 
-        <a th:href="@{/pizzas/{id}(id=*{id})}">detail</a>
+       <nav> <a th:href="@{/pizzas/{id}(id=*{id})}">detail</a> </nav>
 
     </li>
 
