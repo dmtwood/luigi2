@@ -19,6 +19,8 @@
             <dd th:text="*{pikant} ? 'Ja' : 'Nee'"></dd>
             <dt th:if="${inDollar} != null">In dollar</dt>
             <dd th:if="${inDollar} != null" th:text="${inDollar}"></dd>
+            <dt> test if </dt>
+            <dd th:text=" ${pizza} == null ? 'Pizza niet gevonden' : ${pizza.naam} "> </dd>
         </dl>
     </div>
 

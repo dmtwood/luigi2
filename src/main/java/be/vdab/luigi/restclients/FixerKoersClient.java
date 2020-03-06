@@ -1,6 +1,8 @@
 package be.vdab.luigi.restclients;
 
 import be.vdab.luigi.exceptions.KoersClientException;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -10,10 +12,15 @@ import java.net.URL;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
-@Component
+
+@Component // creates a bean to inject in DefaultEuroService
+//@Qualifier("Fixer")
+// when +1 bean classes can be implemented in the same (DefaultEuro)Service, add a qualifier to choose which one
+@Order(1) // replaces Qualifier
 class FixerKoersClient implements KoersClient {
     private static final Pattern PATTERN = Pattern.compile(".*\"USD\":");
     private final URL url;
+
     FixerKoersClient() {
         try {
             url = new URL(
