@@ -9,13 +9,14 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 @Service
+public
 //@Qualifier("Fixer")
 class DefaultEuroService implements EuroService {
 
-    private KoersClient[] koersClients;
+    private final KoersClient[] koersClients;
 
     // @Qualifier to choose which bean is injected (use when +1 client-beans available) >> not when @Order used
-    DefaultEuroService( KoersClient[] koersClients) {
+    public DefaultEuroService( KoersClient[] koersClients) {
         this.koersClients=koersClients;
     }
 
@@ -25,7 +26,8 @@ class DefaultEuroService implements EuroService {
         Exception laatsteException = null;
         for (KoersClient koersClient : koersClients) {
             try {
-                return euro.multiply(koersClient.getDollarKoers().setScale(2, RoundingMode.HALF_UP));
+                return euro.multiply(koersClient.getDollarKoers()
+                        .setScale(2, RoundingMode.HALF_UP));
             } catch (KoersClientException ex) {
                 laatsteException = ex;
             }

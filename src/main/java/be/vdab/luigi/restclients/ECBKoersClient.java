@@ -1,10 +1,9 @@
 package be.vdab.luigi.restclients;
 
 import be.vdab.luigi.exceptions.KoersClientException;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
-
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamException;
@@ -12,23 +11,26 @@ import javax.xml.stream.XMLStreamReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 @Component // creates a bean to inject in DefaultEuroService
 //@Qualifier("ECB")
 // when +1 bean classes can be implemented in the same (DefaultEuro)Service, add a qualifier to choose which one
-@Order(1) // replaces Qualifier
+@Order(2) // replaces Qualifier
 public class ECBKoersClient implements KoersClient {
 
     private final URL url;
 
-    ECBKoersClient() {
-        try {
-            this.url = new URL("https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml");
-        } catch (MalformedURLException ex) {
-            throw new KoersClientException("ECB URL is verkeerd. ", ex);
-        }
+//    ECBKoersClient() {
+//        try {
+//            this.url = new URL("https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml");
+//        } catch (MalformedURLException ex) {
+//            throw new KoersClientException("ECB URL is verkeerd. ", ex);
+//        }
+//    }
+    // use the ecbKoersURL spring bean as declared in application.properties
+    ECBKoersClient(@Value("${ecbKoersURL}") URL url) {
+        this.url = url;
     }
 
     @Override
