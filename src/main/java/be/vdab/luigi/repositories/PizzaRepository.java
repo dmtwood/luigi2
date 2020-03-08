@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+// has a dependency on JDBCTemplate
 public interface PizzaRepository {
     long create(Pizza pizza);
     void update(Pizza pizza);
