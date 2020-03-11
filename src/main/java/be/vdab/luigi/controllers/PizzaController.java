@@ -5,6 +5,7 @@ import be.vdab.luigi.exceptions.KoersClientException;
 import be.vdab.luigi.restclients.KoersClient;
 import be.vdab.luigi.services.DefaultEuroService;
 import be.vdab.luigi.services.EuroService;
+import be.vdab.luigi.services.PizzaService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -24,9 +25,6 @@ import java.util.stream.Collectors;
 
 public class PizzaController {
 
-
-    private final EuroService euroService;
-
     private final Pizza[] pizzas = {
             new Pizza(1,"Prosciutto", BigDecimal.valueOf(7), true),
             new Pizza(2, "Margherita", BigDecimal.valueOf(5), false),
@@ -35,18 +33,22 @@ public class PizzaController {
             new Pizza(5,"Pepperoni", BigDecimal.valueOf(9), true)
     };
 
+    private final EuroService euroService;
+    private final PizzaService pizzaService;
+
     // factory design pattern LoggerFactory >> getlogger()
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    public PizzaController(EuroService euroService) {
+    public PizzaController(EuroService euroService, PizzaService pizzaService) {
         this.euroService = euroService;
+        this.pizzaService = pizzaService;
     }
 
     @GetMapping
     // verwerkt GET requests naar /pizzas en werkt samen met pizzas.html
     public ModelAndView pizzas(){
                 //     html thymeleaf creates , name used to parse the data, private var with pizza strings
-        return new ModelAndView("pizzas", "pizzas", pizzas);
+        return new ModelAndView("pizzas", "pizzas", pizzaService.findAll()); // (pizzas replaced by pizzaService.findAll() on creation PizzaService)
     }
 
     // RequestMapping > pizzas & GetMapping > {id} >> URI template: pizzas/{id}
@@ -59,8 +61,10 @@ public class PizzaController {
         ModelAndView modelAndView2 = new ModelAndView("pizza");
 
         // if the pizza with this id is found, ad it to the pizza ThymeLeaf (TL) page
-        Arrays.stream(pizzas)
-                .filter(pizza -> pizza.getId() == id).findFirst()
+//        Arrays.stream(pizzas)
+//                .filter(pizza -> pizza.getId() == id).findFirst()
+        pizzaService.findById(id)   // replaces stream() when PizzaService is implemented
+
                 .ifPresent(pizza -> {
                     modelAndView2.addObject( "pizza", pizza);
                     try {
@@ -85,7 +89,7 @@ public class PizzaController {
 
     @GetMapping("prijzen")
     public ModelAndView prijzen(){
-        return new ModelAndView("prijzen", "prijzen", uniekePrijzen());
+        return new ModelAndView("prijzen", "prijzen", pizzaService.findUniekePrijzen());
     }
 
     private List<Pizza> pizzasMetPrijs(BigDecimal prijs) {
@@ -97,7 +101,7 @@ public class PizzaController {
     @GetMapping("prijzen/{prijs}")
     public ModelAndView pizzasMetEenPrijs(@PathVariable BigDecimal prijs) {
         return new ModelAndView("prijzen", "pizzas", pizzasMetPrijs(prijs))
-                    .addObject("prijzen", uniekePrijzen() );
+                    .addObject("prijzen", pizzaService.findUniekePrijzen() );
 
         //        ModelAndView modelAndView = new ModelAndView("prijzen","pizzas",pizzasMetPrijs(prijs));
         //        modelAndView.addObject("prijzen", uniekePrijzen());

@@ -1,4 +1,4 @@
-package be.vdab.repositories;
+package be.vdab.luigi.repositories;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest;
