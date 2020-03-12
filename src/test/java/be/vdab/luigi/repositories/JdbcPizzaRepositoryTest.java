@@ -236,7 +236,7 @@ class JdbcPizzaRepositoryTest extends AbstractTransactionalJUnit4SpringContextTe
 
         long id = idVanTestPizza();
 
-        // create a pizza with a the price of one
+        // create a pizza with a price of one
         Pizza pizza = new Pizza(id, "test", BigDecimal.ONE, false);
 
         // update the repository, thus altering the price of the first created pizza named "test" to one

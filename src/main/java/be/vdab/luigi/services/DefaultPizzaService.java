@@ -4,7 +4,6 @@ import be.vdab.luigi.domain.Pizza;
 import be.vdab.luigi.repositories.PizzaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
@@ -15,7 +14,7 @@ public class DefaultPizzaService implements PizzaService {
 
     private final PizzaRepository pizzaRepository;
 
-    // inject bean that implements PizzaRepository (e.g. JdbcPizzaRepository
+    // inject bean that implements PizzaRepository (e.g. JdbcPizzaRepository)
     public DefaultPizzaService(PizzaRepository pizzaRepository) {
         this.pizzaRepository = pizzaRepository;
     }
