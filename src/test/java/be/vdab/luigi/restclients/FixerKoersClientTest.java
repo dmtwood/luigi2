@@ -23,7 +23,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class FixerKoersClientTest {
 
     //    private FixerKoersClient client; // ~ @BeforeEach
-    private final FixerKoersClient client;
+     final FixerKoersClient client;
 
     // inject the FixerKoersClient-bean in its test-unit-constructor
     FixerKoersClientTest(FixerKoersClient client) {

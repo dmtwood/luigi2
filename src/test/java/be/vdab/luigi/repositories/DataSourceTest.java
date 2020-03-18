@@ -21,7 +21,7 @@ class DataSourceTest {
     @Test
     void getConnection() throws SQLException {
         // try the connection of the bean
-        try (Connection connection = dataSource.getConnection()){
+        try (Connection ignored = dataSource.getConnection()){
         }
     }
 }

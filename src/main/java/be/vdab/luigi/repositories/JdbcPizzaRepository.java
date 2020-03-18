@@ -116,7 +116,7 @@ class JdbcPizzaRepository implements PizzaRepository {
     @Override
     public List<Pizza> findByPrijsBetween(BigDecimal van, BigDecimal tot) {
         String sql = "select id, naam, prijs, pikant from pizzas"
-                + " where prijs between ? and ? order by prijs";;
+                + " where prijs between ? and ? order by prijs";
         return jdbcTemplate.query(sql, pizzaMapper, van, tot);
     }
 
