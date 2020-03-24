@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -126,6 +127,7 @@ public class PizzaController {
         //      return new ModelAndView("prijzen", "pizzas", pizzasMetPrijs(prijs));
     }
 
+
     @GetMapping("vantotprijs/form")
     public ModelAndView vanTotPrijsForm() {
         return new ModelAndView(
@@ -138,10 +140,11 @@ public class PizzaController {
                 );
     }
 
+
     // method to process the submit request
     @GetMapping("vantotprijs")
     // spring makes object from the param Class VanTotPrijsForm
-    public ModelAndView vanTotPrijs(VanTotPrijsForm form, Errors errors) {
+    public ModelAndView vanTotPrijs(@Valid VanTotPrijsForm form, Errors errors) {
         ModelAndView modelAndView = new ModelAndView("vantotprijs");
         if (errors.hasErrors()) {
             return modelAndView;

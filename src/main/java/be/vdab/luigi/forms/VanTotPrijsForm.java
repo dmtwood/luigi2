@@ -1,10 +1,12 @@
 package be.vdab.luigi.forms;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
 import java.math.BigDecimal;
 
 public class VanTotPrijsForm {
-    private final BigDecimal van;
-    private final BigDecimal tot;
+    @NotNull @PositiveOrZero
+    private final BigDecimal van, tot;
 
 
     public VanTotPrijsForm(BigDecimal van, BigDecimal tot) {
