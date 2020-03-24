@@ -14,14 +14,22 @@
 
     <label>
         Van:
-        <span th:errors="*{van}" class="fout"></span>
-        <input th:field="*{van}" autofocus>
+            <span th:errors="*{van}" class="fout"></span>
+            <input th:field="*{van}" autofocus type="number" required min="4">
+        <script>
+            document.getElementsByName("van")[0].oninvalid = function() {
+                this.setCustomValidity("Getal tussen 4 en 20 nodig hier");}
+        </script>
     </label>
 
     <label>
         Tot:
-        <span th:errors="*{tot}" class="fout"></span>
-        <input th:field="*{tot}" >
+            <span th:errors="*{tot}" class="fout"></span>
+            <input th:field="*{tot}" type="number" required max="20">
+        <script>
+            document.getElementsByName("van")[0].oninvalid = function() {
+                this.setCustomValidity("Getal tussen 4 en 20 nodig hier");}
+        </script>
     </label>
 
     <button> Zoeken </button>

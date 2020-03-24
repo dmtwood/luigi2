@@ -11,8 +11,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.math.BigDecimal;
@@ -155,6 +157,26 @@ public class PizzaController {
                 pizzaService.findByPrijsBetween(form.getVan(), form.getTot())
         );
     }
+
+    @GetMapping("toevoegen/form")
+    public ModelAndView toevoegenform(){
+        return new ModelAndView("toevoegen") .addObject( new Pizza(0, "",null, false));
+    }
+
+
+    // method handling POST requests
+    @PostMapping
+    public String toevoegen(@Valid Pizza pizza, Errors errors, RedirectAttributes redirectAttributes) {
+        if (errors.hasErrors()) { return "toevoegen";}
+                // new ModelAndView("toevoegen");}
+        long id = pizzaService.create(pizza);
+        redirectAttributes.addAttribute("toegevoegd", id);
+        return  "redirect:/pizzas/toegevoegd/{id}";
+//        return "redirect:/pizzas";      // spring makes redirect response with /pizzas
+        //new ModelAndView("pizzas", "pizzas", pizzaService.findAll());
+    }
+
+
 
 
 }

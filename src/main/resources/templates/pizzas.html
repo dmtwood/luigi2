@@ -8,6 +8,10 @@
 <!--// menu-->
 <nav th:replace="fragments::menu"></nav>
 
+<div th:if="${param.toegevoegd} != null" class="boodschap">
+    Pizza is toegevoegd.
+    Hij heeft het nummer <span th:text="${param.toegevoegd}"></span> .
+</div>
 <h2>Pizza's</h2>
 
 
@@ -22,7 +26,7 @@
 <!--        // (1) Thymeleaf neemt de span tag enkel op in de response als de pizza pikant is.-->
         <span th:if="*{pikant}" >, pikant </span>
 
-       <nav> <a th:href="@{/pizzas/{id}(id=*{id})}">detail</a> </nav>
+       <nav> <a th:href="@{ /pizzas/{id} (id=*{id}) }">detail</a> </nav>
 
     </li>
 
