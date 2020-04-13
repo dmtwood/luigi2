@@ -95,6 +95,7 @@ public class PizzaController {
                 .collect(Collectors.toList());
     }
 
+    // RequestMapping > pizzas & GetMapping > {prijzen} >> URI template: pizzas/{prijzen}
     @GetMapping("prijzen")
     public ModelAndView prijzen() {
         return new ModelAndView(
@@ -112,6 +113,7 @@ public class PizzaController {
                         .collect(Collectors.toList());
     }
 
+    // RequestMapping > pizzas & GetMapping > {prijs} >> URI template: pizzas/{prijs}
     @GetMapping("prijzen/{prijs}")
     public ModelAndView pizzasMetEenPrijs(@PathVariable BigDecimal prijs) {
         return new ModelAndView(
@@ -130,19 +132,7 @@ public class PizzaController {
     }
 
 
-    @GetMapping("vantotprijs/form")
-    public ModelAndView vanTotPrijsForm() {
-        return new ModelAndView(
-                "vantotprijs"
-        )
-                .addObject(new VanTotPrijsForm(
-                                // BigDecimal.ONE, BigDecimal.TEN
-                                null, null
-                        )
-                );
-    }
-
-
+    // RequestMapping > pizzas & GetMapping > {vantotprijs} >> URI template: pizzas/{vantotprijs}
     // method to process the submit request
     @GetMapping("vantotprijs")
     // spring makes object from the param Class VanTotPrijsForm
@@ -158,25 +148,53 @@ public class PizzaController {
         );
     }
 
+    // RequestMapping > pizzas & GetMapping > {vantotprijs/form} >> URI template: pizzas/{vantotprijs/form}
+    @GetMapping("vantotprijs/form")
+    public ModelAndView vanTotPrijsForm() {
+        return new ModelAndView(
+                "vantotprijs"
+        )
+                .addObject(new VanTotPrijsForm(
+                                // BigDecimal.ONE, BigDecimal.TEN
+                                null, null
+                        )
+                );
+    }
+
+
+    // RequestMapping > pizzas & GetMapping > {toevoegen/form} >> URI template: pizzas/{toevoegen/form}
     @GetMapping("toevoegen/form")
-    public ModelAndView toevoegenform(){
+    public ModelAndView toevoegenForm(){
+        // return Pizza-object as form object to Thymeleaf page
         return new ModelAndView("toevoegen") .addObject( new Pizza(0, "",null, false));
     }
 
 
-    // method handling POST requests
+    // RequestMapping > pizzas & GetMapping > {toevoegen} >> URI template: pizzas/{toevoegen}
+    // method handling POST requests to the URL from @RequestMapping("pizzas")
     @PostMapping
     public String toevoegen(@Valid Pizza pizza, Errors errors, RedirectAttributes redirectAttributes) {
-        if (errors.hasErrors()) { return "toevoegen";}
-                // new ModelAndView("toevoegen");}
+
+        if (errors.hasErrors()) {
+            return "toevoegen";
+        }
+                 // new ModelAndView("toevoegen");}
+
+        // create the pizza and read it's id
         long id = pizzaService.create(pizza);
+        System.out.println("id is " +id);
+
+        // redirectAttributes >> adds attributes to the redirect url | e.g. /pizzas?toegevoegd=123
+        // !! add handling of param.toegevoegd in pizzas.html, the TL-page where we are redirecting to
+                               // adds    " ?toegevoegd=idVal "   to   " /pizzas "
         redirectAttributes.addAttribute("toegevoegd", id);
-        return  "redirect:/pizzas/toegevoegd/{id}";
-//        return "redirect:/pizzas";      // spring makes redirect response with /pizzas
+
+        // spring makes redirect response with /pizzas, to avoid adding doubles on refresh
+        return "redirect:/pizzas";
+
+//        return  "redirect:/pizzas/id/{id}";
         //new ModelAndView("pizzas", "pizzas", pizzaService.findAll());
     }
-
-
 
 
 }

@@ -18,13 +18,15 @@
 <!--(1) Je geeft elke fragment een unieke naam met th:fragment. Dit fragment heet menu.-->
 <nav th:fragment="menu" xmlns:th="http://www.thymeleaf.org">
     <ul>
-        <li> <a th:href="@{/}"> Welkom </a> </li>
-        <li> <a th:href="@{/pizzas}"> Pizza's </a></li>
-        <li><a th:href="@{/os}">OS</a></li>
-        <li><a th:href="@{/kleuren}">Kleur</a></li>
-        <li> <a th:href="@{/pizzas/prijzen}"> Prijzen </a>   </li>
-        <li><a th:href="@{/pizzas/vantotprijs/form}">Van tot prijs</a></li>
-        <li><a href="@{/pizzas/toevoegen/form }"> Toevoegen </a> </li>
+        <li> <a th:href="@{/}">                         Welkom          </a> </li>
+        <li> <a th:href="@{/pizzas}">                   Pizza's         </a> </li>
+        <li> <a th:href="@{/os}">                       OS              </a> </li>
+        <li> <a th:href="@{/kleuren}">                  Kleur           </a> </li>
+        <li> <a th:href="@{/pizzas/prijzen}">           Prijzen         </a> </li>
+        <li> <a th:href="@{/pizzas/vantotprijs/form}">  Van tot prijs   </a> </li>
+        <li> <a th:href="@{/pizzas/toevoegen/form}">    Toevoegen       </a> </li>
+        <li> <a th:href="@{/identificatie}">            Inloggen        </a> </li>
+        <li> <a th:href="@{/mandje}">                   Winkelmandje    </a> </li>
     </ul>
 </nav>
 

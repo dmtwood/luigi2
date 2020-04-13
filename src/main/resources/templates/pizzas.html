@@ -8,9 +8,9 @@
 <!--// menu-->
 <nav th:replace="fragments::menu"></nav>
 
-<div th:if="${param.toegevoegd} != null" class="boodschap">
+<div th:if="${param.id} != null" class="boodschap">
     Pizza is toegevoegd.
-    Hij heeft het nummer <span th:text="${param.toegevoegd}"></span> .
+    Hij heeft het nummer <span th:text="${param.id}"></span> .
 </div>
 <h2>Pizza's</h2>
 

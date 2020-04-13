@@ -3,30 +3,38 @@
 <head th:replace="fragments::head(title='Toevoegen')"></head>
 
 <body>
-<script th:src="@{/js/preventDoubleSubmit.js}" defer/>
-    <nav th:replace="fragments::menu"></nav>
+// prevent double submits
+<script th:src="@{/js/preventDoubleSubmit.js}" defer></script>
 
-    <h1> Toevoegen </h1>
+<nav th:replace="fragments::menu"></nav>
 
-    <form th:object="${pizza}" method="post" th:action=" @{/pizzas} ">
-        <label>
-            Naam:
-                <span th:errors="*{naam}"></span>
-                <input th:field="*{naam}" required min="0">
-        </label>
-        <label>
-            Prijs:
-            <span th:errors="*{prijs}"></span>
-            <input th:field="*{prijs}" min="0" type="number">
-        </label>
-        <label>
-            Pikant:
-            <span th:errors="*{pikant}"></span>
-            <input type="checkbox" th:field="*{pikant}">
-        </label>
-        <input type="hidden" name="id" th:value="0"/>
-        <button> Toevoegen </button>
-    </form>
+<h1> Toevoegen </h1>
+
+
+// on submit form >> post request to /pizzas with form values entered in browser
+<form th:object="${pizza}" method="post" th:action=" @{/pizzas} ">
+    <label>
+        Naam:
+        <span th:errors="*{naam}"></span>
+        <input th:field="*{naam}" required min="0">
+    </label>
+    <label>
+        Prijs:
+        <span th:errors="*{prijs}"></span>
+        <input th:field="*{prijs}" min="0" type="number">
+    </label>
+    <label>
+        Pikant:
+        <span th:errors="*{pikant}"></span>
+        <input type="checkbox" th:field="*{pikant}">
+    </label>
+
+    // use class Pizza as form object
+    // on submit, spring inits Pizza constructor with form values and also needs an id
+    // by using value 0, the DB adds the id using AI
+    <input type="hidden" name="id" th:value="0"/>
+    <button> Toevoegen</button>
+</form>
 </body>
 
 </html>

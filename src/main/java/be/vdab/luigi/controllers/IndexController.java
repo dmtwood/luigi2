@@ -2,6 +2,7 @@ package be.vdab.luigi.controllers;
 
 import be.vdab.luigi.domain.Adres;
 import be.vdab.luigi.domain.Persoon;
+import be.vdab.luigi.sessions.Identificatie;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,12 +25,14 @@ import java.util.concurrent.atomic.AtomicInteger;
     // De controller verwerkt straks alle browser requests naar die URL.
 @RequestMapping("/")
 
-
     // Je mag de naam van een controller class vrij kiezen.
     // De class niet public: Je geeft classes, en vars, niet meer visibility dan nodig.
 class IndexController {
 
     private final AtomicInteger aantalKerenBekeken = new AtomicInteger();
+   // private final Identificatie identificatie;
+
+   // IndexController(Identificatie identificatie) { this.identificatie = identificatie; } // better global with MyControllerAdvice
 
     private String boodschap() {
         int uur = LocalTime.now().getHour();
@@ -67,6 +70,10 @@ public ModelAndView index(@CookieValue(name = "reedsBezocht", required = false)
         if (reedsBezocht != null) {
             modelAndView.addObject("reedsBezocht", true);
         }
+
+
+        // modelAndView.addObject(identificatie);
+
         return modelAndView;
     }
 
