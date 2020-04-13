@@ -1,7 +1,14 @@
+// *********************   STEP (4.b.1.b ) | CREATE SERVICES (IF,) CLASSES & METHODS  *******************************/
+// @Services & @Transactional
+// inject REPOSITORY-bean(S) in SERVICE CONSTRUCTOR
+
+
 package be.vdab.luigi.services;
+//
 
 import be.vdab.luigi.domain.Pizza;
 import be.vdab.luigi.repositories.PizzaRepository;
+import be.vdab.luigi.services.PizzaService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;

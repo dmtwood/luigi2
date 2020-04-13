@@ -1,7 +1,8 @@
+// *****************   STEP 3 | CREATE SMART DOMAINS       ******************************/
+
 package be.vdab.luigi.domain;
 
 import org.springframework.format.annotation.NumberFormat;
-
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;

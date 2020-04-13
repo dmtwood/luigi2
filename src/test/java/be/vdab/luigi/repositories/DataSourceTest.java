@@ -1,11 +1,16 @@
+//****************************  STEP 2 | CREATE DATASOURCE   *******************************/
+
+
 package be.vdab.luigi.repositories;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest;
-
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
+
+/***********  first bean created to test the DB-connection (settings in application.properties)  *******************/
+
 
 @JdbcTest
 // creates IOC container >> spring loads DataSource-bean & JDBCTemplate-bean

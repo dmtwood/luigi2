@@ -1,3 +1,7 @@
+// *********************   STEP (4.b.1.b ) | CREATE SERVICES (IF,) CLASSES & METHODS  *******************************/
+// @Services & @Transactional
+// inject REPOSITORY-bean(S) in SERVICE CONSTRUCTOR
+
 package be.vdab.luigi.services;
 
 import be.vdab.luigi.exceptions.KoersClientException;

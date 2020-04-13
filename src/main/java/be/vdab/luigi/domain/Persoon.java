@@ -1,3 +1,4 @@
+// ********************   STEP 3 | CREATE SMART DOMAINS       *******************************/
 package be.vdab.luigi.domain;
 
 import java.time.LocalDate;

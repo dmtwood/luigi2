@@ -1,8 +1,10 @@
+// *********************   STEP (4.c.3) | CREATE CONTROLLER ADVICE STORING SESSION DATA BY ID *******************************/
+// inject SERVICE-bean(S) in CONTROLLER-CONSTRUCTOR
+// Classes >>  @Controller & @RequestMapping
+
 package be.vdab.luigi.controllers;
 
 import be.vdab.luigi.sessions.Identificatie;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;

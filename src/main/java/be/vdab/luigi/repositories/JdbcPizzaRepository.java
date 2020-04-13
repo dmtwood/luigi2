@@ -1,3 +1,6 @@
+// *********************   STEP (4.a.2 ) | CREATE( REPOS IF) IMPLEMNTING CLASSES & METHODS       *******************************/
+// INJECT THE JDBC-TEMPLATE BEAN (depending on DATASOURCE) in the REPOSITORY CLASS CONSTUCTOR to CREATE a DB-connection
+
 package be.vdab.luigi.repositories;
 import be.vdab.luigi.domain.Pizza;
 import be.vdab.luigi.exceptions.PizzaNietGevondenException;

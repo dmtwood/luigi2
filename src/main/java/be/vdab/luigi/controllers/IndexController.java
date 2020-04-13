@@ -1,3 +1,7 @@
+// *********************   STEP (4.c.1) | CREATE CONTROLLER CLASSES & METHODS  *******************************/
+// inject SERVICE-bean(S) in CONTROLLER-CONSTRUCTOR
+// Classes >>  @Controller & @RequestMapping
+
 package be.vdab.luigi.controllers;
 
 import be.vdab.luigi.domain.Adres;

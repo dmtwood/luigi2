@@ -1,3 +1,5 @@
+// ********************   STEP 3 | CREATE SMART DOMAINS       *******************************/
+
 package be.vdab.luigi.domain;
 
 public class Adres {

@@ -1,3 +1,5 @@
+// *********************   STEP (4.a.3 ) | CREATE INTEGRATION TESTS FOR REPOS    *******************************/
+// INJECT THE REPOSITORY BEAN IN THE REPOSITORYTEST-CONSTRUCTOR
 package be.vdab.luigi.repositories;
 
 //package be.vdab.luigi.repositories;
