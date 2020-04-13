@@ -21,9 +21,9 @@
     <li th:each="pizza:${pizzas}" th:object="${pizza}" >
 
 <!--        // (2) Je toont de attributen naam en prijs van de pizza.-->
-        <span th:text="*{naam}" ></span> &euro;<span th:text="*{prijs}" ></span>
+        <span th:text="*{naam}" ></span> &euro;<span th:text="*{{prijs}}" ></span>  <!-- {{ pattern }}-->
 
-<!--        // (1) Thymeleaf neemt de span tag enkel op in de response als de pizza pikant is.-->
+        <!--        // (1) Thymeleaf neemt de span tag enkel op in de response als de pizza pikant is.-->
         <span th:if="*{pikant}" >, pikant </span>
 
        <nav> <a th:href="@{ /pizzas/{id} (id=*{id}) }">detail</a> </nav>

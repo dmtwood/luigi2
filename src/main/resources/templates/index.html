@@ -49,10 +49,11 @@
     <dt>Adres</dt>
 <!--    (1) Je geeft aan dat je attributen zal lezen van zaakvoerder.adres. >> GENESTE ATTRIBUTEN  -->
     <dd th:object="${zaakvoerder.adres}"
-        th:text="| *{straat} *{huisNr} *{postcode} *{gemeente} |"
-    >
+        th:text="| *{straat} *{huisNr} *{postcode} *{gemeente} |" >
         <!--        (2) Je combineert data en vaste tekst (en spaties) tussen   | en |    -->
     </dd>
+    <dt>Geboorte</dt>
+    <dd th:text="*{{geboorte}}"></dd>
 
 </dl>
 

@@ -1,33 +1,22 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="nl" xmlns:th="http://www.thymeleaf.org">
-
-<head th:replace= "fragments::head(title='Mandje')">
-    <meta charset="UTF-8">
-    <title>Mandje</title>
-</head>
-
-
-
+<head th:replace="fragments::head(title='Mandje')"></head>
 <body>
-
-    <script th:src="@{ls/preventDoubleSubmit.js}" defer> </script>
-
-    <nav th:replace="fragments::menu"> </nav>
-
-    <h1> Mandje </h1>
-
-    <form method="post" th:action="@{/mandje}">
-        <label>
-            Pizza
-            <select name="id">
-                <option th:each="pizza:${allePizzas}" th:object="${pizza}"
-                        th:text="*{naam}" th:value="*{id}" >    </option>
-            </select>
-        </label>
-    </form>
-
-
-
+<script th:src="@{/js/preventDoubleSubmit.js}" defer></script>
+<nav th:replace="fragments::menu"></nav>
+<h1>Mandje</h1>
+<form method="post" th:action="@{/mandje}"> 
+    <label>Pizza
+        <select name="id"> 
+            <option th:each="pizza:${allePizzas}" th:object="${pizza}" 
+                    th:text="*{naam}" th:value="*{id}" ></option>
+        </select>
+    </label>
+    <button>Toevoegen</button>
+</form>
+<h1 th:if="${pizzasInMandje} != null">Pizza's in mandje:</h1>
+<ul th:if="${pizzasInMandje} != null">
+    <li th:each="pizza:${pizzasInMandje}" th:text="${pizza.naam}"></li>
+</ul>
 </body>
-
 </html>

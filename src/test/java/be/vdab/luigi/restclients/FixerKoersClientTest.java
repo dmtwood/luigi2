@@ -30,7 +30,7 @@ class FixerKoersClientTest {
         this.client = client;
     }
 
-    // with hardcoded URL
+    // with hardcoded URL x
 //    @BeforeEach
 //    void beforeEach() {
 //        client = new FixerKoersClient();

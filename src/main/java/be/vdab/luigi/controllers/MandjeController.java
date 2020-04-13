@@ -20,7 +20,7 @@ class MandjeController {
     private final Mandje mandje;
     private final PizzaService pizzaService;
 
-    public MandjeController(Mandje mandje, PizzaService pizzaService) {
+    MandjeController(Mandje mandje, PizzaService pizzaService) {
         this.mandje = mandje;
         this.pizzaService = pizzaService;
     }
@@ -33,8 +33,8 @@ class MandjeController {
                 .addObject("allePizzas", allePizzas);
         if (mandje.isGevuld()) {
             modelAndView.addObject("pizzasInMandje",
-                    allePizzas.stream().filter( pizza -> mandje.bevat(pizza.getId()))
-                    .collect(Collectors.toList()));
+                    allePizzas.stream().filter(pizza -> mandje.bevat(pizza.getId()))
+                            .collect(Collectors.toList()));
         }
         return modelAndView;
     }

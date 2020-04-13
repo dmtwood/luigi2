@@ -11,20 +11,14 @@ import java.util.Set;
 @SessionScope
 public class Mandje implements Serializable {
     private static final long serialVersionUID = 1L;
-
-    // minimize session data, only list id's, not whole Pizza's
     private final Set<Long> ids = new LinkedHashSet<>();
-
-    public void voegToe(long id){
+    public void voegToe(long id) {
         ids.add(id);
     }
-
-    public boolean bevat(long id){
+    public boolean bevat(long id) {
         return ids.contains(id);
     }
-
-    public boolean isGevuld(){
+    public boolean isGevuld() {
         return ! ids.isEmpty();
     }
-
 }
